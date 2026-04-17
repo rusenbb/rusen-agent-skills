@@ -1,0 +1,273 @@
+/*
+  arxiv-presentation base theme
+  ─────────────────────────────
+  Copy this CSS into the <style> block of each presentation.
+  Customize ONLY the :root variables to re-skin.
+  Add paper-specific components AFTER this block.
+
+  CDN dependencies (add to <head>):
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+*/
+
+/* ============================================================
+   THEME VARIABLES — the ONLY thing you change per paper
+   ============================================================
+   Choose colors inspired by the paper's own figures/branding.
+   Cool palette (blues) for technical/architecture papers.
+   Warm palette (oranges/ambers) for systems/applied papers.
+   ============================================================ */
+:root {
+  --c-bg:        #080c15;       /* slide background              */
+  --c-surface:   #0f1525;       /* card / box background          */
+  --c-border:    #1a2338;       /* subtle borders                 */
+  --c-text:      #e8ecf4;       /* primary text                   */
+  --c-dim:       #5a6580;       /* faintest text (labels)         */
+  --c-muted:     #8090aa;       /* secondary text                 */
+  --c-accent:    #3b82f6;       /* primary accent                 */
+  --c-green:     #22c55e;
+  --c-orange:    #f97316;
+  --c-red:       #ef4444;
+  --c-purple:    #a855f7;
+  --c-amber:     #fbbf24;
+  --c-cyan:      #06b6d4;
+  --font-body:   'Inter', system-ui, sans-serif;
+  --font-mono:   'JetBrains Mono', monospace;
+}
+
+/* ============================================================
+   BASE OVERRIDES
+   ============================================================ */
+.reveal-viewport { background: var(--c-bg); }
+.reveal {
+  font-family: var(--font-body); font-size: 28px; color: var(--c-text);
+}
+.reveal .slides { text-align: left; }
+.reveal .slides section {
+  padding: 48px 64px; box-sizing: border-box; height: 100%;
+}
+.reveal h1, .reveal h2, .reveal h3 {
+  font-family: var(--font-body); font-weight: 700; color: var(--c-text);
+  text-transform: none; letter-spacing: -0.03em; line-height: 1.1; text-align: left;
+}
+.reveal h1 { font-size: 2.4em; font-weight: 800; }
+.reveal h2 { font-size: 1.55em; margin-bottom: 0.5em; }
+.reveal h3 { font-size: 1.05em; color: var(--c-accent); font-weight: 600; }
+.reveal p, .reveal li { line-height: 1.65; }
+.reveal ul { margin-left: 0.3em; list-style: none; padding-left: 0; }
+.reveal li { margin-bottom: 0.5em; padding-left: 1.2em; position: relative; }
+.reveal li::before {
+  content: ''; position: absolute; left: 0; top: 0.55em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--c-accent);
+}
+.reveal strong { color: var(--c-text); font-weight: 600; }
+.reveal code {
+  font-family: var(--font-mono); font-size: 0.85em;
+  background: var(--c-surface); padding: 0.1em 0.35em; border-radius: 4px;
+}
+.reveal a { color: var(--c-accent); text-decoration: none; }
+.reveal .slide-number {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--c-dim); background: transparent;
+}
+
+/* ============================================================
+   FRAGMENT ANIMATIONS
+   ============================================================ */
+.reveal .fragment.scale-in {
+  opacity: 0; transform: scale(0.7);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal .fragment.scale-in.visible { opacity: 1; transform: scale(1); }
+
+.reveal .fragment.blur-in {
+  opacity: 0; filter: blur(12px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal .fragment.blur-in.visible { opacity: 1; filter: blur(0); }
+
+.reveal .fragment.sweep-right {
+  opacity: 0; transform: translateX(-40px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal .fragment.sweep-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ============================================================
+   LAYOUT COMPONENTS
+   ============================================================ */
+.centered {
+  display: flex !important; flex-direction: column;
+  justify-content: center; align-items: center; text-align: center;
+}
+.two-col {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+}
+.two-col.wide-left  { grid-template-columns: 3fr 2fr; }
+.two-col.wide-right { grid-template-columns: 2fr 3fr; }
+
+.stripe {
+  position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--c-accent), var(--c-green), var(--c-orange));
+  opacity: 0.8;
+}
+
+.chapter {
+  font-size: 0.42em; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.18em; color: var(--c-dim); margin-bottom: 0.8em;
+}
+
+/* ============================================================
+   VISUAL COMPONENTS
+   ============================================================ */
+
+/* --- hero number --- */
+.hero-num {
+  font-family: var(--font-mono); font-weight: 800; line-height: 1;
+  letter-spacing: -0.04em;
+}
+.hero-num.massive { font-size: 5em; }
+.hero-num.large   { font-size: 3.2em; }
+
+@keyframes soft-pulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.05); }
+}
+.glow { position: relative; }
+.glow::after {
+  content: attr(data-text);
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font: inherit; color: inherit; filter: blur(30px);
+  animation: soft-pulse 3s ease-in-out infinite;
+  pointer-events: none; z-index: -1;
+}
+
+/* --- callout box --- */
+.callout {
+  background: var(--c-surface); border-left: 3px solid var(--c-accent);
+  padding: 0.75em 1.1em; border-radius: 0 8px 8px 0; margin: 0.7em 0; font-size: 0.88em;
+}
+.callout.green  { border-left-color: var(--c-green); }
+.callout.orange { border-left-color: var(--c-orange); }
+.callout.red    { border-left-color: var(--c-red); }
+.callout.amber  { border-left-color: var(--c-amber); }
+.callout.cyan   { border-left-color: var(--c-cyan); }
+.callout.purple { border-left-color: var(--c-purple); }
+
+/* --- result cards --- */
+.result-row { display: flex; gap: 16px; margin: 0.6em 0; }
+.result-card {
+  flex: 1; background: var(--c-surface);
+  border: 1px solid var(--c-border); border-radius: 10px;
+  padding: 0.8em 1em; text-align: center;
+}
+.result-card .val {
+  font-family: var(--font-mono); font-size: 1.6em; font-weight: 800; line-height: 1.1;
+}
+.result-card .desc {
+  font-size: 0.52em; color: var(--c-muted); margin-top: 0.3em; line-height: 1.3;
+}
+
+/* --- table --- */
+.clean-table {
+  width: 100%; border-collapse: collapse; font-size: 0.7em; margin: 0.5em 0;
+}
+.clean-table th {
+  text-align: left; padding: 0.5em 0.7em;
+  border-bottom: 2px solid var(--c-border);
+  color: var(--c-dim); font-weight: 600;
+  font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.clean-table td { padding: 0.45em 0.7em; border-bottom: 1px solid var(--c-border); }
+.clean-table tr:last-child td { border-bottom: none; }
+.clean-table .winner td {
+  background: color-mix(in srgb, var(--c-green) 8%, transparent); font-weight: 600;
+}
+
+/* --- equation block --- */
+.eq {
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  border-radius: 8px; padding: 0.6em 1em;
+  text-align: center; font-family: var(--font-mono);
+  font-size: 0.88em; margin: 0.6em 0;
+}
+
+/* --- figure --- */
+.fig { text-align: center; margin: 0.7em 0; }
+.fig img {
+  max-width: 100%; border-radius: 8px;
+  border: 1px solid var(--c-border); background: #fff; padding: 10px;
+}
+.fig .cap { font-size: 0.5em; color: var(--c-dim); margin-top: 0.4em; }
+
+/* --- comparison boxes --- */
+.vs-row {
+  display: flex; align-items: center; justify-content: center; gap: 24px; margin: 0.6em 0;
+}
+.vs-box {
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  border-radius: 10px; padding: 0.7em 1.4em;
+  text-align: center; font-family: var(--font-mono); min-width: 160px;
+}
+.vs-box .num { font-size: 1.8em; font-weight: 800; line-height: 1.1; }
+.vs-box .lbl { font-size: 0.55em; color: var(--c-muted); margin-top: 0.2em; }
+.vs-box.red   .num { color: var(--c-red); }
+.vs-box.green .num { color: var(--c-green); }
+.vs-badge {
+  font-size: 0.7em; font-weight: 700; color: var(--c-dim);
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  border-radius: 50%; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* --- meter / utilization bar --- */
+.meter-wrap { margin: 0.6em 0; }
+.meter-label {
+  font-size: 0.6em; color: var(--c-muted);
+  display: flex; justify-content: space-between; margin-bottom: 4px;
+}
+.meter-track {
+  width: 100%; height: 28px; background: var(--c-surface);
+  border-radius: 6px; overflow: hidden; border: 1px solid var(--c-border);
+}
+.meter-fill {
+  height: 100%; border-radius: 6px 0 0 6px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.meter-fill.red   { background: linear-gradient(90deg, var(--c-red), #b91c1c); }
+.meter-fill.green { background: linear-gradient(90deg, var(--c-green), #16a34a); }
+.meter-fill.blue  { background: linear-gradient(90deg, var(--c-accent), #2563eb); }
+
+/* --- flow steps --- */
+.flow-steps {
+  display: flex; align-items: stretch; gap: 8px;
+  margin: 0.7em 0; flex-wrap: wrap; justify-content: center;
+}
+.flow-step {
+  background: var(--c-surface); border: 1px solid var(--c-border);
+  border-radius: 8px; padding: 0.5em 0.8em; font-size: 0.62em;
+  text-align: center; min-width: 120px; flex: 1;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.flow-step .step-num {
+  font-family: var(--font-mono); font-weight: 800; font-size: 1.4em; margin-bottom: 0.15em;
+}
+.flow-arrow { color: var(--c-dim); font-size: 1.3em; display: flex; align-items: center; }
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+.sub { font-size: 0.65em; color: var(--c-muted); font-weight: 400; margin-top: -0.3em; margin-bottom: 0.8em; }
+.dim { color: var(--c-muted); }
+.small { font-size: 0.72em; }
+.tiny  { font-size: 0.6em; }
+.mono  { font-family: var(--font-mono); }
+.c-accent { color: var(--c-accent); }
+.c-green  { color: var(--c-green); }
+.c-orange { color: var(--c-orange); }
+.c-red    { color: var(--c-red); }
+.c-amber  { color: var(--c-amber); }
+.c-purple { color: var(--c-purple); }
+.c-cyan   { color: var(--c-cyan); }
