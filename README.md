@@ -8,6 +8,7 @@ Personal collection of [Claude Code skills](https://docs.claude.com/en/docs/clau
 
 | Skill | Description |
 |---|---|
+| [`lit-research`](lit-research/) | Orienting survey of a new research area — discover the landscape, cluster by method / finding / theory / problem framing, produce an executive overview. First-touch skill when entering a new topic. |
 | [`paper-triage`](paper-triage/) | Fast SKIM/READ/DEEP/SKIP verdict for a paper from arxiv, Zotero, DOI, or a PDF path. |
 | [`paper-notes`](paper-notes/) | Turn a paper (or a Zotero collection/tag) into Article Notes in the rusen-brain vault, matching vault conventions. |
 | [`lit-review`](lit-review/) | Synthesize a literature review from a set of papers into a vault note: thematic clusters, comparison, synthesis, gaps. |
@@ -58,8 +59,8 @@ git clone https://github.com/rusenbb/rusen-agent-skills ~/.claude/skills
 # Option B — clone elsewhere and symlink individual skills
 git clone https://github.com/rusenbb/rusen-agent-skills ~/code/rusen-agent-skills
 for s in arxiv-presentation citation-trace context-init idea-deep-dive \
-         lit-review ml-paper-context obsidian-cli paper-notes \
-         paper-triage vaultdb; do
+         lit-research lit-review ml-paper-context obsidian-cli \
+         paper-notes paper-triage vaultdb; do
   ln -s ~/code/rusen-agent-skills/$s ~/.claude/skills/$s
 done
 ```
