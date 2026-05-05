@@ -30,6 +30,14 @@ The plugin is named `rusen-research`. The repo also acts as a single-plugin mark
 |---|---|
 | [`context-init`](skills/context-init/) | Explore an unfamiliar codebase in read-only mode and produce a concise onboarding report. |
 
+## Commands
+
+Slash commands invoked explicitly with `/<plugin>:<command>`:
+
+| Command | Description |
+|---|---|
+| [`/rusen-research:think`](commands/think.md) | Enter **Thinking Buddy mode** — Socratic, no first-draft generation, explain-back required, predict-before-reveal. A friction-on learning mode designed to use AI to *sharpen the user* rather than to ship faster output. Optional argument: a topic to seed the session (e.g. `/rusen-research:think B-trees vs B+ trees`). Exit by saying `ship mode` or `just answer`. |
+
 ## Shared design principles
 
 Skills in the **research workflow** group follow strict conventions:
@@ -57,6 +65,8 @@ rusen-agent-skills/
 │   ├── paper-notes/SKILL.md
 │   ├── paper-triage/SKILL.md
 │   └── vaultdb/SKILL.md
+├── commands/
+│   └── think.md             # /rusen-research:think — Thinking Buddy mode
 ├── README.md
 └── LICENSE
 ```
@@ -91,6 +101,14 @@ Changes to skill files take effect in the current Claude Code session without re
 2. Add a `SKILL.md` with at least `name` and `description` in the frontmatter.
 3. Keep the description specific — it's what Claude reads to decide when to invoke the skill.
 
+## Adding a command
+
+1. Create a markdown file under `commands/` named after the command (kebab-case).
+2. Add YAML frontmatter with at least `description`. Optional: `argument-hint` for a placeholder shown in the picker.
+3. Body is the prompt template. Use `$ARGUMENTS` to interpolate user-supplied arguments.
+4. Invoke as `/rusen-research:<name>` after `claude plugin marketplace update rusen-research` + restart.
+
 ## Changelog
 
+- **0.2.0** — Add `/rusen-research:think` command (Thinking Buddy mode — Socratic, no first-draft generation, explain-back required).
 - **0.1.0** — Repackaged as a Claude Code plugin (was: 11 loose skills installed via symlink). Skills now live under `skills/`. Two retired: `arxiv-presentation` (unused), `ml-paper-context` (folded into `paper-notes` as the ML Context block + `enrich-only` mode).
