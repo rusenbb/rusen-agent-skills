@@ -1,0 +1,18 @@
+{
+  "name": "rusen-research",
+  "description": "Research workflow skills for the rusen-brain Obsidian vault: paper triage and notes (with ML enrichment), citation traversal, literature surveys, idea exploration, and vault primitives (vaultdb, obsidian-cli).",
+  "version": "0.1.0",
+  "author": {
+    "name": "Rusen Birben"
+  },
+  "homepage": "https://github.com/rusenbb/rusen-agent-skills",
+  "repository": "https://github.com/rusenbb/rusen-agent-skills",
+  "keywords": [
+    "research",
+    "obsidian",
+    "zotero",
+    "literature-review",
+    "paper-notes",
+    "citation-graph"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "rusen-research",
+  "description": "Personal marketplace hosting the rusen-research plugin — a research-workflow skill bundle for Obsidian + Zotero.",
+  "owner": {
+    "name": "Rusen Birben"
+  },
+  "plugins": [
+    {
+      "name": "rusen-research",
+      "description": "Research workflow skills for the rusen-brain Obsidian vault: paper triage and notes (with ML enrichment), citation traversal, literature surveys, idea exploration, and vault primitives (vaultdb, obsidian-cli).",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "Rusen Birben"
+      },
+      "homepage": "https://github.com/rusenbb/rusen-agent-skills"
+    }
+  ]
+}
